@@ -27,7 +27,7 @@ class StoreHourController extends Controller
         return response()->json($this->storeService->checkIfOpen($date));
     }
 
-    public function updateStoreHours(Request $request, StoreHour $storeHour): JsonResponse
+    public function update(Request $request, StoreHour $storeHour): JsonResponse
     {
         $data = $request->validate([
             'day_of_week' => 'required|integer|min:0|max:6',

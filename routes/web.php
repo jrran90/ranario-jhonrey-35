@@ -26,5 +26,5 @@ Route::get('/next-opening', [StoreHourController::class, 'getNextOpening']);
  *
  * Since this is just a simple setup, I didn't create login for authentication.
  */
-Route::get('/admin/store-hours', [PageController::class, 'index'])->name('admin.store-hours');
-Route::patch('/admin/store-hours/{storeHour}', [PageController::class, 'updateStoreHours'])->name('admin.store-hours.update');
+Route::get('/admin/store-hours', [PageController::class, 'indexStoreHours'])->name('admin.store-hours');
+Route::patch('/admin/store-hours/{storeHour}', [StoreHourController::class, 'update'])->name('admin.store-hours.update');

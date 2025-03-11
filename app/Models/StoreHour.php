@@ -17,4 +17,8 @@ class StoreHour extends Model
         'is_open',
         'is_alternate_saturday',
     ];
+
+    protected $casts = [
+        'is_open' => 'boolean',
+    ];
 }
