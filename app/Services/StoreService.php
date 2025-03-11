@@ -62,6 +62,7 @@ class StoreService
         $currentTime = $now->format('H:i:s');
 
         $nextOpening = StoreHour::query()
+            ->where('is_open', true)
             ->where(function ($query) use ($currentDayOfWeek, $currentTime) {
                 $query
                     ->where('day_of_week', '>', $currentDayOfWeek)
@@ -87,7 +88,9 @@ class StoreService
         if ($nextOpening->day_of_week === $currentDayOfWeek) {
             $nextOpeningDateTime->setTimeFromTimeString($nextOpening->open_time);
         } else {
-            $daysToAdd = ($nextOpening->day_of_week - $currentDayOfWeek + 7) % 7;
+            $daysToAdd = ($nextOpening->day_of_week >= $currentDayOfWeek)
+                ? $nextOpening->day_of_week - $currentDayOfWeek
+                : ($nextOpening->day_of_week - $currentDayOfWeek + 7) % 7;
             $nextOpeningDateTime->addDays($daysToAdd)->setTimeFromTimeString($nextOpening->open_time);
         }
 
@@ -115,6 +118,10 @@ class StoreService
         $isOpen = false;
 
         foreach ($storeHours as $hour) {
+            if (!$hour->is_open) {
+                continue;
+            }
+
             if ($hour->is_alternate_saturday) {
                 $isEvenWeek = $parsedDate->weekOfYear % 2 === 0;
                 if (!$isEvenWeek) {

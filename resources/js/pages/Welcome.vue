@@ -11,11 +11,6 @@ onMounted(async () => {
 })
 
 const status = computed(() => isOpen.value ? 'open' : 'closed');
-const reopeningMessage = computed(() => {
-    if (!isOpen.value && nextOpening.value) {
-        return `Reopens in ${nextOpening.value}`;
-    }
-})
 
 const getStoreStatus = async () => {
     const res = await axios.get('store-status');
