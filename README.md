@@ -27,6 +27,10 @@ npm run dev
 > **Note:** I'm currently using Laravel Herd for running my project. You may use ```php artisan serve```
 > and ```npm run dev```
 
+### Admin route
+URL: `/admin/store-hours`
+> **Note:** I only created the UI/UX for time update, as to adding new schedule, I just add a seeder for it.
+
 ### A brief description of your solution.
 
 - Check the store's status, if it's open at the moment.
